@@ -1,8 +1,10 @@
+
 from flask import Flask
 import json
 from random import choice
 import random
 from datetime import date
+import os
 
 horoscope = {}
 signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева","Весы","Скорпион", "Стрелец", "Козерог", "Водолец", "Рыбы"]
@@ -16,7 +18,6 @@ def get_text_from_horoscope(sign):
     if (d, sign) not in horoscope:
         horoscope[(d, sign)] = gen_horoscope()
 
-
     data = {}
     data['sign'] = sign
     data['date'] = (d.day, d.year)
@@ -27,7 +28,12 @@ def get_text_from_horoscope(sign):
     return json_data
 
 def prepare_horoscope():
-    with open('text.txt', encoding='utf-8') as f:
+
+    script_dir = os.path.dirname(__file__)
+    rel_path = "static/text.txt"
+    abs_file_path = os.path.join(script_dir, rel_path)
+
+    with open(abs_file_path, encoding='utf-8') as f:
         global words
         words = []
         words = f.read().split()
@@ -82,7 +88,7 @@ def send_horoskop():
 @app.route('/<string:sign>')
 def get_horoskop_for_sign(sign):
 
-    if sign not in ["Лев", "Овен"]:
+    if sign not in signs:
         return 'not such sign'
     return get_text_from_horoscope(sign)
 
