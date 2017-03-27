@@ -5,6 +5,7 @@ from random import choice
 import random
 from datetime import date
 import os
+from flask import render_template
 
 horoscope = {}
 signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева","Весы","Скорпион", "Стрелец", "Козерог", "Водолец", "Рыбы"]
@@ -81,8 +82,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def send_horoskop():
-    return 'Welcome to Forer'
-    #comment
+    return render_template('hello.html')
 
 
 @app.route('/<string:sign>')
