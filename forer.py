@@ -1,15 +1,13 @@
-
-from flask import Flask
-import json
 from random import choice
 import random
 from datetime import date
 import os
-from flask import render_template
+import json
 
 horoscope = {}
 signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева","Весы","Скорпион", "Стрелец", "Козерог", "Водолец", "Рыбы"]
 
+# main function: returns todays horoskop for the sign
 def get_text_from_horoscope(sign):
 
     d = date.today()
@@ -28,6 +26,7 @@ def get_text_from_horoscope(sign):
 
     return json_data
 
+# prapares markov_chain for text.txt in static/text.txt
 def prepare_horoscope():
 
     script_dir = os.path.dirname(__file__)
@@ -45,6 +44,7 @@ def prepare_horoscope():
         markov_chain[key].append(words[i+2])
     return markov_chain
 
+#gererates random text from markov chain (prepared by prepare_horoscope) of size 25
 def gen_horoscope():
     stopsentence = (".", "!", "?",)
     markov_chain = prepare_horoscope()
@@ -77,20 +77,4 @@ def gen_horoscope():
     result = ' '.join(gen_words)
     return result
 
-app = Flask(__name__)
 
-
-@app.route('/')
-def send_horoskop():
-    return render_template('hello.html')
-
-
-@app.route('/<string:sign>')
-def get_horoskop_for_sign(sign):
-
-    if sign not in signs:
-        return 'not such sign'
-    return get_text_from_horoscope(sign)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8080)
