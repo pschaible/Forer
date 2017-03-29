@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def send_horoskop():
-    return render_template('test.html', signs=signs)
+    return render_template('hello.html', signs=signs)
 
 
 @app.route('/<sign>')
