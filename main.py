@@ -10,6 +10,9 @@ app = Flask(__name__)
 def send_horoskop():
     return render_template('hello.html', signs=signs)
 
+@app.route('/about')
+def about_horoskop():
+    return render_template('about_project.html', signs=signs)
 
 @app.route('/<sign>')
 def get_horoskop_for_sign(sign):
