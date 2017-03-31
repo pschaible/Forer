@@ -5,7 +5,7 @@ import os
 import json
 
 horoscope = {}
-signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева","Весы","Скорпион", "Стрелец", "Козерог", "Водолец", "Рыбы"]
+signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева","Весы","Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"]
 
 # main function: returns todays horoskop for the sign
 def get_text_from_horoscope(sign):
